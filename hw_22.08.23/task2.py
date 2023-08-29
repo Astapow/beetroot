@@ -1,6 +1,6 @@
-some_number = 3806363634
+user_input = input("Enter your number: ")
 
-if isinstance(some_number, int) and len(str(some_number)) == 10:
+if user_input.isdigit() and len(user_input) == 10:
     print("Your number is ok")
 else:
     print("Number entered incorrectly")
