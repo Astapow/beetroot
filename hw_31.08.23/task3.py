@@ -1,9 +1,9 @@
 def make_operation(operator, *args):
     if operator == "+":
         result = sum(args)
-    if operator == "-":
+    elif operator == "-":
         result = args[0] - sum(args[1:])
-    if operator == "*":
+    elif operator == "*":
         result = 1
         for arg in args:
             result *= arg
