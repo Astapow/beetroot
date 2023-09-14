@@ -4,6 +4,7 @@ def input_errors():
         second = int(input("Enter second number: "))
 
         result = first ** 2 / second
+
         print(result)
         return result
 

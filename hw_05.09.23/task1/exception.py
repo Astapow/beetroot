@@ -1,6 +1,7 @@
 # option 1
 def oops(first_num, second_num):
     res = first_num / second_num
+
     return res
 
 
