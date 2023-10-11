@@ -1,6 +1,11 @@
 import sys
 
-new_path = r"D:\PycharmProjects\beetroot\hw_02.09.23\task2"
-sys.path.append(new_path)
+sys.path.append(r"D:\beetroot\hw_02.09.23\task2")
+sys.path.append(r"D:\beetroot\hw_02.09.23\task3")
 
-print(new_path)
+
+import mymod
+
+
+
+

@@ -1,3 +1,7 @@
+user_intput = input("Enter name file.txt: ")
+name = user_intput + ".txt"
+
+
 def count_lines(name):
     with open(name, 'r') as file:
         lines = file.readlines()
@@ -11,10 +15,18 @@ def count_chars(name):
 
 
 def test(name):
-    lines = count_lines(name)
-    chars = count_chars(name)
-    print(f"lines: {lines}")
-    print(f"Chars: {chars}")
+    try:
+        lines = count_lines(name)
+        chars = count_chars(name)
+
+        print(f"Lines: {lines}")
+        print(f"Characters: {chars}")
+
+    except FileNotFoundError:
+        print(f"File '{name}' not found.")
+
+    except Exception as exc:
+        print(f"An error occurred: {exc}")
 
 
-input()
+test(name)
