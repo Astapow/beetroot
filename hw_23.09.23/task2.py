@@ -10,9 +10,14 @@ class Boss:
 
     @property
     def workers(self):
-        return self._workers
+        text = f'Workers for {self.name} are:\n'
+        for employee in self._workers:
+            text += f'{employee["id_"]}, {employee["name"]}\n'
 
-    def add_worker(self, worker):
+        return text
+
+    @workers.setter
+    def workers(self, worker):
         self._workers.append(worker)
 
     def __repr__(self):
@@ -21,13 +26,13 @@ class Boss:
 
 class Worker:
     def __init__(self, name: str, boss: Boss):
-        self.id = random.randint(1, 999)
+        self.id_ = random.randint(1, 999)
         self.name = name
         self.boss = boss
-        boss.add_worker(self)
+        boss.workers = {"id_": self.id_, "name": name}
 
     def __repr__(self):
-        return f"Worker: {self.id} {self.name}"
+        return f"Worker: {self.id_} {self.name}"
 
 
 # Example Usage:
