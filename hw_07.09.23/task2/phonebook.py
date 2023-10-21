@@ -40,8 +40,16 @@ def add_contact():
         print("Invalid input. Both name and telephone number are required.")
 
 
-def search(type_: str) -> dict:
+def search_by_fullname(type_: str) -> dict:
     return {number: contact for number, contact in PHONEBOOK.items() if type_.lower() in contact['full_name'].lower()}
+
+
+def search_by_phone(type_: str) -> dict:
+    return {number: contact for number, contact in PHONEBOOK.items() if type_.lower() in number.lower()}
+
+
+def search_by_city(type_: str) -> dict:
+    return {number: contact for number, contact in PHONEBOOK.items() if type_.lower() in contact['address'].lower()}
 
 
 def update_phonebook(phone):
@@ -100,32 +108,27 @@ while True:
 
         if user_chose == "2":
             search_element = input("Enter name, surname or full name: ")
-            search(search_element)
+            print(search_by_fullname(search_element))
             print("===========>")
-            print(PHONEBOOK)
 
         if user_chose == "3":
             search_element = input("Enter telephone number: ")
-            search(search_element)
+            print(search_by_phone(search_element))
             print("===========>")
-            print(PHONEBOOK)
 
         if user_chose == "4":
             search_element = input("Enter city or state: ")
-            search(search_element)
+            print(search_by_city(search_element))
             print("===========>")
-            print(PHONEBOOK)
 
         if user_chose == "5":
-            delete_phone()
+            print(delete_phone())
             print("===========>")
-            print(PHONEBOOK)
 
         if user_chose == "6":
             search_element = input("Enter telephone number: ")
             update_phonebook(search_element)
             print("===========>")
-            print(PHONEBOOK)
 
         if user_chose == "7":
             print("Good bye")
