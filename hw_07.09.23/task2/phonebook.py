@@ -20,15 +20,13 @@ if os.path.exists(datafile_path):
 def add_contact():
     first_name = input("Enter first name: ")
     last_name = input("Enter last name: ")
-    full_name = first_name + " " + last_name
     telephone_number = input("Enter telephone number: ")
     city_or_state = input("Enter city or state: ")
 
-    if telephone_number and full_name:
+    if telephone_number and first_name and last_name:
         PHONEBOOK[telephone_number] = {
             "first_name": first_name,
             "last_name": last_name,
-            "full_name": full_name,
             "address": city_or_state,
         }
 
@@ -40,30 +38,41 @@ def add_contact():
         print("Invalid input. Both name and telephone number are required.")
 
 
-def search_by_fullname(type_: str) -> dict:
-    return {number: contact for number, contact in PHONEBOOK.items() if type_.lower() in contact['full_name'].lower()}
+def search_by_name(search_pattern: str) -> dict:
+    return {number: contact for number, contact in PHONEBOOK.items()
+            if search_pattern.lower() in contact['"first_name"'].lower()}
 
 
-def search_by_phone(type_: str) -> dict:
-    return {number: contact for number, contact in PHONEBOOK.items() if type_.lower() in number.lower()}
+def search_by_surname(search_pattern: str) -> dict:
+    return {number: contact for number, contact in PHONEBOOK.items()
+            if search_pattern.lower() in contact['last_name'].lower()}
 
 
-def search_by_city(type_: str) -> dict:
-    return {number: contact for number, contact in PHONEBOOK.items() if type_.lower() in contact['address'].lower()}
+def search_by_fullname(search_pattern: str) -> dict:
+    return {number: contact for number, contact in PHONEBOOK.items()
+            if search_pattern.lower() in contact['last_name'].lower()}
+
+
+def search_by_phone(search_pattern: str) -> dict:
+    return {number: contact for number, contact in PHONEBOOK.items()
+            if search_pattern.lower() in number.lower()}
+
+
+def search_by_city(search_pattern: str) -> dict:
+    return {number: contact for number, contact in PHONEBOOK.items()
+            if search_pattern.lower() in contact['address'].lower()}
 
 
 def update_phonebook(phone):
     first_name = input("Enter first name: ")
     last_name = input("Enter last name: ")
-    full_name = first_name + " " + last_name
     city_or_state = input("Enter city or state: ")
 
     updated_phonebook = {}
-    if phone and full_name:
+    if phone and first_name and last_name:
         updated_phonebook[phone] = {
             "first_name": first_name,
             "last_name": last_name,
-            "full_name": full_name,
             "address": city_or_state,
         }
         PHONEBOOK.update(updated_phonebook)
