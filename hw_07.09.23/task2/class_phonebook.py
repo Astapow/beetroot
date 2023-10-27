@@ -6,10 +6,10 @@ import argparse
 class Phonebook:
     def __init__(self, data_path):
         self.datafile_path = data_path
-        self.PHONEBOOK = {}
+        self.phonebook = {}
         if os.path.exists(self.datafile_path):
             with open(self.datafile_path, "r") as file:
-                self.PHONEBOOK = json.load(file)
+                self.phonebook = json.load(file)
 
     def add_contact(self):
         first_name = input("Enter first name: ")
@@ -18,44 +18,53 @@ class Phonebook:
         city_or_state = input("Enter city or state: ")
 
         if telephone_number and first_name and last_name:
-            self.PHONEBOOK[telephone_number] = {
+            self.phonebook[telephone_number] = {
                 "first_name": first_name,
                 "last_name": last_name,
                 "address": city_or_state,
             }
 
             with open(self.datafile_path, "w") as file_obj:
-                json.dump(self.PHONEBOOK, file_obj, indent=4)
-                print(self.PHONEBOOK)
+                json.dump(self.phonebook, file_obj, indent=4)
+                print(self.phonebook)
         else:
             print("Invalid input. Both name and telephone number are required.")
 
+    def search_by_pattern(self, search_term, field):
+        if field in ["first_name", "last_name", "address"]:
+            return {number: contact for number, contact in self.phonebook.items()
+                    if search_term.lower() in contact[field].lower()}
+
+        elif field == "full_name":
+            return {number: contact for number, contact in self.phonebook.items()
+                    if search_term.lower() in (contact['first_name'] + ' ' + contact['last_name']).lower()}
+
+        elif field == "phone":
+            return {number: contact for number, contact in self.phonebook.items()
+                    if search_term in number}
+
+        else:
+            return {}
+
     def search_by_name(self):
-        search_pattern = input("Enter name or full name: ")
-        return {number: contact for number, contact in self.PHONEBOOK.items()
-                if search_pattern.lower() in contact['first_name'].lower()}
+        search_term = input("Enter name or full name: ")
+        return self.search_by_pattern(search_term, "first_name")
 
     def search_by_surname(self):
-        search_pattern = input("Enter surname: ")
-        return {number: contact for number, contact in self.PHONEBOOK.items()
-                if search_pattern.lower() in contact['last_name'].lower()}
+        search_term = input("Enter name or full name: ")
+        return self.search_by_pattern(search_term, "last_name")
 
     def search_by_fullname(self):
-        search_pattern = input("Enter name or full name: ")
-        results = {number: contact for number, contact in self.PHONEBOOK.items()
-                   if search_pattern.lower() in (contact['first_name'] + ' ' + contact['last_name']).lower()}
-
-        return results
+        search_term = input("Enter name or full name: ")
+        return self.search_by_pattern(search_term, "full_name")
 
     def search_by_phone(self):
-        search_pattern = input("Enter phone number: ")
-        return {number: contact for number, contact in self.PHONEBOOK.items()
-                if search_pattern.lower() in number.lower()}
+        search_term = input("Enter phone number: ")
+        return self.search_by_pattern(search_term, "phone")
 
     def search_by_city(self):
-        search_pattern = input("Enter city: ")
-        return {number: contact for number, contact in self.PHONEBOOK.items()
-                if search_pattern.lower() in contact['address'].lower()}
+        search_term = input("Enter city or address: ")
+        return self.search_by_pattern(search_term, "address")
 
     def update_phonebook(self):
         phone = input("Enter telephone number: ")
@@ -70,19 +79,19 @@ class Phonebook:
                 "last_name": last_name,
                 "address": city_or_state,
             }
-            self.PHONEBOOK.update(updated_phonebook)
+            self.phonebook.update(updated_phonebook)
 
             with open(self.datafile_path, "w") as file_obj:
-                json.dump(self.PHONEBOOK, file_obj, indent=4)
-                print(self.PHONEBOOK)
+                json.dump(self.phonebook, file_obj, indent=4)
+                print(self.phonebook)
 
     def delete_phone(self):
         number = input("Enter telephone number to delete: ")
-        if number in self.PHONEBOOK:
-            del self.PHONEBOOK[number]
+        if number in self.phonebook:
+            del self.phonebook[number]
 
             with open(self.datafile_path, "w") as file_obj:
-                json.dump(self.PHONEBOOK, file_obj, indent=4)
+                json.dump(self.phonebook, file_obj, indent=4)
 
             print(f"Phone number {number} deleted.")
         else:
@@ -90,8 +99,8 @@ class Phonebook:
 
     def run(self):
         while True:
-            print("Please select options")
-            print("+-----------------+")
+            print("Please select options:")
+            print("+----------------+")
             print("1: Add new entries")
             print("2: Search by name, surname, full name")
             print("3: Search by telephone number")
