@@ -1,0 +1,13 @@
+[33m2455157[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m HEAD@{0}: reset: moving to HEAD
+[33m2455157[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m HEAD@{1}: reset: moving to 2455157
+[33m02daa8d[m[33m ([m[1;31morigin/develop[m[33m)[m HEAD@{2}: commit: hw 31/08 fix task3
+[33m2455157[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m HEAD@{3}: commit: hw 31/08
+[33m91ce4fb[m HEAD@{4}: commit: hw 29/08
+[33m23eec0f[m HEAD@{5}: commit: hw 26/08
+[33m1c418a1[m HEAD@{6}: commit: hw 24/08
+[33m2137f2b[m HEAD@{7}: commit: fix hw. add user input
+[33m69d295b[m HEAD@{8}: commit: hw 22/08
+[33m2f2ac29[m HEAD@{9}: commit: hw 19/08
+[33m6b4eef1[m HEAD@{10}: commit: hw 17/08
+[33mbcaf148[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{11}: checkout: moving from master to develop
+[33mbcaf148[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{12}: commit (initial): let's start
