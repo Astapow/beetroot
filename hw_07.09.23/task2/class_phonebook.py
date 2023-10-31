@@ -32,6 +32,7 @@ class Phonebook:
 
     def search_by_pattern(self, search_term, field):
         if field in ["first_name", "last_name", "address"]:
+
             return {number: contact for number, contact in self.phonebook.items()
                     if search_term.lower() in contact[field].lower()}
 

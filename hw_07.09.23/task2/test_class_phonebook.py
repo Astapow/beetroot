@@ -23,6 +23,7 @@ def test_add_contact_first(monkeypatch):
 
     with open("phonebook.json", "r") as file:
         phonebook_data = json.load(file)
+
         assert len(phonebook_data) == 1
         assert list(phonebook_data.values())[0]["first_name"] == "John"
 
