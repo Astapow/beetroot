@@ -4,7 +4,7 @@ import argparse
 
 
 class Phonebook:
-    def __init__(self, data_path):
+    def __init__(self, data_path="phonebook.json"):
         self.datafile_path = data_path
         self.phonebook = {}
         if os.path.exists(self.datafile_path):
@@ -32,6 +32,7 @@ class Phonebook:
 
     def search_by_pattern(self, search_term, field):
         if field in ["first_name", "last_name", "address"]:
+
             return {number: contact for number, contact in self.phonebook.items()
                     if search_term.lower() in contact[field].lower()}
 

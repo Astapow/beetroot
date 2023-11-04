@@ -3,6 +3,8 @@ CHANNELS = ["BBC", "Discovery", "TV1000"]
 
 class TVController:
     def __init__(self, channel):
+        if not channel:
+            raise ValueError("Channel list cannot be empty")
         self.channel = channel
         self.channel_now = 0
 
